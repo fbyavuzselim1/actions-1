@@ -9,7 +9,7 @@ jobs:
         - name: Checkout Repo
           uses: actions/checkout@v4
         - name: Install cowsay program
-          uses: sudo apt-get Install cowsay -y 
+          uses: sudo apt-get install cowsay -y 
         - name: Generate ASCII Artwork
           run: cowsay -f dragon "Run for cover, I am a DRAGON" >> dragon.txt   
         - name: Test file exist
