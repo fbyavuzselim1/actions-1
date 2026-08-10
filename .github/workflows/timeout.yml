@@ -1,0 +1,22 @@
+name: Timeout Handling Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Deployment Script
+        timeout-minutes: 1
+        run: |
+          echo "Dağıtım başlatılıyor..."
+          sleep 600
+
+      - name: Health Check
+        run: echo "Uygulama kontrol ediliyor..."
