@@ -23,4 +23,4 @@ jobs:
           sleep 600
 
       - name: Health Check
-        run: echo "Uygulama kontrol ediliyor.."
+        run: echo "Uygulama kontrol ediliyor..."
