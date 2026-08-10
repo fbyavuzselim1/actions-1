@@ -1,0 +1,26 @@
+name: Timeout Handling Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # 1. Job Seviyesi: Tüm deploy işi en fazla 15 dakika sürebilir
+    timeout-minutes: 15
+
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Deployment Script
+        # 2. Step Seviyesi: Bu adım en fazla 1 dakika sürebilir
+        timeout-minutes: 1
+        run: |
+          echo "Dağıtım başlatılıyor..."
+          # 10 dakikalık (600 sn) bekleme komutu. 
+          # Step seviyesindeki 1 dakikalık limit nedeniyle 1. dakikada iptal edilecektir.
+          sleep 600
+
+      - name: Health Check
+        run: echo "Uygulama kontrol ediliyor..."
