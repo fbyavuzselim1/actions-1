@@ -9,14 +9,18 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     strategy:
+      # 1. Bir job hata aldığında diğer paralel işlerin iptal edilmesini engeller
+      fail-fast: false
+      
       matrix:
-        # Özel değişken isimleri (os, images vb.)
-        os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         images: [hello-world, alpine]
+        
+        # 2. Windows üzerinde Alpine imajının çalıştırılmasını matristen çıkarır
+        exclude:
+          - os: windows-latest
+            images: alpine
 
     steps:
-      - name: Docker Bilgisini Kontrol Et
-        run: docker info
-
-      - name: ${{ matrix.images }} Imajini ${{ matrix.os }} Üzerinde Calistir
+      - name: Docker Imajini Calistir
         run: docker run ${{ matrix.images }}
